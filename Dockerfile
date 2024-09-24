@@ -1,6 +1,12 @@
 # Temel imaj olarak PHP-FPM kullanılıyor
 FROM php:8.2-fpm
 
+RUN apt-get update && apt-get install -y \
+    git \
+    zip \
+    unzip \
+    && docker-php-ext-install zip
+
 # Gerekli uzantıları yükle
 RUN docker-php-ext-install pdo pdo_mysql
 
