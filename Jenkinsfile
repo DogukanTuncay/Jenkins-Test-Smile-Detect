@@ -3,7 +3,7 @@ pipeline {
 
         environment {
         DB_DATABASE = credentials('db-database-credential-id')
-        DB_CREDENTIALS = credentials('db-credential-id')
+        DB_CREDENTIALS = credentials('db-database-username-password-id')
     }
 
 
