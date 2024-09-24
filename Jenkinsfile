@@ -1,9 +1,6 @@
 pipeline {
     agent any
 
-
-
-
     stages {
         // Projeyi GitHub'dan çek
         stage('Checkout') {
@@ -12,7 +9,8 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/DogukanTuncay/Jenkins-Test-Smile-Detect'
             }
         }
-         stage('Create .env File') {
+
+        stage('Create .env File') {
             steps {
                 script {
                     // .env dosyasını .env.example'dan oluşturma
@@ -24,37 +22,37 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Docker imajını oluştur
-                sh 'docker build -t laravel-app .'
+                sh 'docker-compose build --no-cache'
             }
         }
 
-        stage('Run Docker Container') {
+        stage('Run Docker Compose Up') {
             steps {
-                // Docker konteynerini çalıştır
-                sh 'docker run -d -p 8081:80 laravel-app'
+                // Docker Compose ile konteynerleri çalıştır
+                sh 'docker-compose up -d'
             }
         }
+
         stage('Run Migrations') {
             steps {
                 script {
-                    sh 'docker run --rm laravel-app php artisan migrate'
+                    // Migrate işlemini çalıştır
+                    sh 'docker-compose exec app php artisan migrate'
                 }
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'docker run --rm laravel-app php artisan test'
+                // Testleri çalıştır
+                sh 'docker-compose exec app php artisan test'
             }
         }
 
-        // Build işlemi (opsiyonel)
-        stage('Build') {
+        stage('Build Key') {
             steps {
-                // Eğer bir build işleminiz varsa burada tanımlayın, şu an sadece örnek echo kullanılıyor
-                echo 'Build process here...'
-                sh 'docker run --rm laravel-app php artisan key:generate'
-
+                // Anahtar oluşturma işlemi
+                sh 'docker-compose exec app php artisan key:generate'
             }
         }
     }
@@ -62,19 +60,13 @@ pipeline {
     // Hata durumunda bildirimi sağlayacak post aşaması
     post {
         always {
-
             echo 'Pipeline tamamlandı'
-
         }
         success {
-
             echo 'Pipeline başarıyla tamamlandı'
-
         }
         failure {
-
             echo 'Pipeline başarısız oldu'
-
         }
     }
 }
