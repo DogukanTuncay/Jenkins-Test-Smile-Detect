@@ -17,7 +17,7 @@ pipeline {
                 script {
                     // .env dosyasını .env.example'dan oluşturma
                     sh 'cp .env.example .env'
-                    sh 'php artisan key:generate'
+                    sh 'docker run --rm laravel-app php artisan key:generate'
                 }
             }
         }
