@@ -9,21 +9,22 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/DogukanTuncay/Jenkins-Test-Smile-Detect'
             }
         }
-         stage('Build Docker Image') {
+       stage('Build Docker Image') {
             steps {
-                // Docker image'ını oluştur
+                // Docker imajını oluştur
                 sh 'docker build -t laravel-app .'
-                  // .env dosyasını oluştur ve uygulama anahtarını oluştur
-                sh 'cp .env.example .env'
-                sh 'sail artisan key:generate'
             }
         }
 
-        // Testleri çalıştır
+        stage('Run Docker Container') {
+            steps {
+                // Docker konteynerini çalıştır
+                sh 'docker run -d -p 8080:80 laravel-app'
+            }
+        }
         stage('Run Tests') {
             steps {
-                // PHPUnit testlerini çalıştır
-                sh 'php artisan test'
+                sh 'docker run --rm laravel-app php artisan test'
             }
         }
 
