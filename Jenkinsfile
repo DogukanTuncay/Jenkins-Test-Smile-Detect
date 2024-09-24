@@ -20,7 +20,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 // Docker konteynerini çalıştır
-                sh 'docker run -d -p 8080:80 laravel-app'
+                sh 'docker run -d -p 8000:80 laravel-app'
             }
         }
 
