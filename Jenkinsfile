@@ -17,7 +17,6 @@ pipeline {
                 script {
                     // .env dosyasını .env.example'dan oluşturma
                     sh 'cp .env.example .env'
-                    sh 'docker run --rm laravel-app php artisan key:generate'
                 }
             }
         }
@@ -38,6 +37,7 @@ pipeline {
         stage('Run Migrations') {
             steps {
                 script {
+
                     sh 'docker run --rm laravel-app php artisan migrate'
                 }
             }
@@ -54,6 +54,8 @@ pipeline {
             steps {
                 // Eğer bir build işleminiz varsa burada tanımlayın, şu an sadece örnek echo kullanılıyor
                 echo 'Build process here...'
+                sh 'docker run --rm laravel-app php artisan key:generate'
+
             }
         }
     }
