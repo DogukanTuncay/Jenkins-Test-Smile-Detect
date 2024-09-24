@@ -22,7 +22,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Docker imajını oluştur
-                sh 'docker-compose build'
+                sh 'docker-compose build --no-cache'
             }
         }
 
