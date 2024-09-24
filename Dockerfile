@@ -1,5 +1,5 @@
 # Temel imaj olarak PHP-FPM kullanılıyor
-FROM php:8.1-fpm
+FROM php:8.2-fpm
 
 # Gerekli uzantıları yükle
 RUN docker-php-ext-install pdo pdo_mysql

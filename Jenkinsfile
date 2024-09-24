@@ -9,7 +9,8 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/DogukanTuncay/Jenkins-Test-Smile-Detect'
             }
         }
-       stage('Build Docker Image') {
+
+        stage('Build Docker Image') {
             steps {
                 // Docker imajını oluştur
                 sh 'docker build -t laravel-app .'
@@ -22,6 +23,7 @@ pipeline {
                 sh 'docker run -d -p 8080:80 laravel-app'
             }
         }
+
         stage('Run Tests') {
             steps {
                 sh 'docker run --rm laravel-app php artisan test'
@@ -40,7 +42,6 @@ pipeline {
     // Hata durumunda bildirimi sağlayacak post aşaması
     post {
         always {
-            // Test sonuçları veya hata raporları için herhangi bir ekleme yapılabilir
             echo 'Pipeline tamamlandı'
         }
         success {
