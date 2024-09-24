@@ -1,10 +1,7 @@
 pipeline {
     agent any
 
-        environment {
-        DB_DATABASE = credentials('db-database-credential-id')
-        DB_CREDENTIALS = credentials('db-database-username-password-id')
-    }
+
 
 
     stages {
@@ -20,9 +17,6 @@ pipeline {
                 script {
                     // .env dosyasını .env.example'dan oluşturma
                     sh 'cp .env.example .env'
-                    sh "echo 'DB_DATABASE=${DB_DATABASE}' >> .env"
-                    sh "echo 'DB_USERNAME=${ DB_CREDENTIALS.username}' >> .env"
-                    sh "echo 'DB_PASSWORD=${ DB_CREDENTIALS.password}' >> .env"
                     sh 'php artisan key:generate'
                 }
             }
