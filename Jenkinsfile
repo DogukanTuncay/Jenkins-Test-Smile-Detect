@@ -34,7 +34,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Docker imajını oluştur
-                sh 'docker-compose build --no-cache'
+                sh 'docker-compose build --no-cache --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g)'
             }
         }
 
