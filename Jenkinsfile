@@ -68,7 +68,7 @@ pipeline {
             steps {
                 script {
                     // Migrate işlemini çalıştır
-                    sh 'docker-compose exec app php artisan migrate'
+                    sh 'docker-compose exec laravel.test php artisan migrate'
                 }
             }
         }
@@ -76,14 +76,14 @@ pipeline {
         stage('Run Tests') {
             steps {
                 // Testleri çalıştır
-                sh 'docker-compose exec app php artisan test'
+                sh 'docker-compose exec laravel.test php artisan test'
             }
         }
 
         stage('Build Key') {
             steps {
                 // Anahtar oluşturma işlemi
-                sh 'docker-compose exec app php artisan key:generate'
+                sh 'docker-compose exec alaravel.testpp php artisan key:generate'
             }
         }
     }
