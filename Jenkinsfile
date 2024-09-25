@@ -40,7 +40,7 @@ pipeline {
                 sh 'echo "Listing all files and directories:"'
                 sh 'ls -la'
                 // Docker imajını oluştur
-               sh 'docker build --no-cache'
+               sh 'docker build -t laravel.test .'
             }
         }
            stage('Docker Compose Build') {
