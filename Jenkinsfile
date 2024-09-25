@@ -40,7 +40,13 @@ pipeline {
                 sh 'echo "Listing all files and directories:"'
                 sh 'ls -la'
                 // Docker imajını oluştur
-                sh 'docker-compose build --no-cache --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g)'
+               sh 'docker build --no-cache'
+            }
+        }
+           stage('Docker Compose Build') {
+            steps {
+                // Docker Compose dosyasını kullanarak konteyneri oluştur
+                sh 'docker-compose build --no-cache'
             }
         }
 
