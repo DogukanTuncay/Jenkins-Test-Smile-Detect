@@ -4,7 +4,7 @@ services:
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
-            context: './vendor/laravel/sail/runtimes/8.3'
+            context: .
         image: 'sail-8.3/app'
         extra_hosts:
             - 'host.docker.internal:host-gateway'

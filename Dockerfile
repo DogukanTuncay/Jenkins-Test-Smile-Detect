@@ -14,15 +14,21 @@ RUN apt-get update && apt-get install -y \
 # Gerekli uzantıları yükle
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Çalışma dizinini ayarla
-WORKDIR /var/www
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+
 
 # Proje dosyalarını kopyala
 COPY . .
 
-# Composer'ı yükle ve bağımlılıkları yükle
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+RUN useradd -G www-data,root -u $uid -d /home/$user $user RUN mkdir -p /home/$user/.composer && chown -R $user:$user /home/$user
+
+# Çalışma dizinini ayarla
+WORKDIR /var/www
+
+USER $user
 
 # Sunucuyu başlat
 CMD ["php-fpm"]
