@@ -1,6 +1,18 @@
 pipeline {
     agent any
-
+ environment {
+        APP_PORT = "8081"
+        VITE_PORT = "5173"
+        DB_PORT = "3306"
+        DB_DATABASE = "test-app"
+        DB_USERNAME = "root"
+        DB_PASSWORD = "root"
+        WWWGROUP = "1000"
+        WWWUSER = "1000"
+        SAIL_XDEBUG_MODE = "off"
+        SAIL_XDEBUG_CONFIG = "client_host=host.docker.internal"
+        PWD = "${WORKSPACE}" // Jenkins'in o anki çalışma alanını dinamik olarak alır
+    }
     stages {
         // Projeyi GitHub'dan çek
         stage('Checkout') {
