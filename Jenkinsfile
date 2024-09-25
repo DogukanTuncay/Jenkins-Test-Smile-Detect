@@ -33,6 +33,13 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
+                // Mevcut dizini logla
+                sh 'echo "Current Directory: $(pwd)"'
+
+                // Tüm dosyaları ve dizinleri listele
+                sh 'echo "Listing all files and directories:"'
+                sh 'ls -la'
+
                 // Docker imajını oluştur
                 sh 'docker-compose build --no-cache --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g)'
             }
