@@ -45,6 +45,13 @@ pipeline {
         }
            stage('Docker Compose Build') {
             steps {
+
+                   sh 'echo "Current Directory: $(pwd)"'
+
+                // Tüm dosyaları ve dizinleri listele
+                sh 'echo "Listing all files and directories:"'
+                sh 'ls -la'
+
                 // Docker Compose dosyasını kullanarak konteyneri oluştur
                 sh 'docker-compose build --no-cache'
             }
