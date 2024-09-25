@@ -30,6 +30,19 @@ pipeline {
                 }
             }
         }
+
+        stage('Build Docker Image') {
+            steps {
+                // Mevcut dizini logla
+                sh 'echo "Current Directory: $(pwd)"'
+
+                // Tüm dosyaları ve dizinleri listele
+                sh 'echo "Listing all files and directories:"'
+                sh 'ls -la'
+                // Docker imajını oluştur
+               sh 'docker build -t laravel.test .'
+            }
+        }
            stage('Docker Compose Build') {
             steps {
 
