@@ -22,7 +22,7 @@ COPY . .
 
 # Composer'ı yükle ve bağımlılıkları yükle
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer install
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # Sunucuyu başlat
 CMD ["php-fpm"]
