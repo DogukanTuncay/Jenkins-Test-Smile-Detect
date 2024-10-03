@@ -1,4 +1,4 @@
-# Temel imaj olarak PHP-FPM kullanılıyor
+# Temel imaj olarak PHP-FPM kullanılıyor test
 FROM php:8.2-fpm
 
 # Gerekli uzantıları yükleyin
