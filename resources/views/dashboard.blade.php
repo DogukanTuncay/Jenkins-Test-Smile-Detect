@@ -38,7 +38,7 @@
                         @endif
                     </div>
                 @else
-                    <p class="text-gray-600">Henüz bir resim yüklemediniz.</p>
+                    <p class="text-gray-600">Henüz bir resim Yüklenmedi.</p>
                 @endif
             </div>
         </div>
